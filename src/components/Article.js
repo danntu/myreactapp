@@ -1,21 +1,52 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-function Article(props){
-    const {article} = props
+class Article extends Component{
+
+    // constructor(props){
+    //     super(props)
+    //
+    //     this.state = {
+    //         isOpen : true
+    //     }
+    // }
+
+    state = {
+        isOpen : true
+    }
+
+    render() {
+        const {article} = this.props
 
 
-    console.log("=====", props)
+        console.log("=====", this.props)
 
-    const const_body = <section>{article.text}</section>
-    return (
-        <div>
-            <h2><b>Article title:</b> {article.title}</h2>
-            <section><b>Article section:</b>{const_body}</section>
-            <h3>
-                Article creation date: {(new Date(article.date)).toDateString()}
-            </h3>
-        </div>
-    )
+        const const_body = this.state.isOpen && <section>{article.text}</section>
+        return (
+            <div>
+                <h2>{article.title}
+                    <button onClick={this.handleClick}>
+                        {this.state.isOpen ? 'close' : 'open' }
+                    </button>
+                </h2>
+                {const_body}
+                <h3>
+                    Article creation date: {(new Date(article.date)).toDateString()}
+                </h3>
+            </div>
+        )
+    }
+
+    handleClick  = ()=>{
+        console.log('=======','clicked')
+        this.setState({
+            isOpen :  !this.state.isOpen
+        })
+    }
+}
+
+
+function  handleClick() {
+
 }
 
 export default Article
